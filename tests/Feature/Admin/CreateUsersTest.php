@@ -350,4 +350,32 @@ class CreateUsersTest extends TestCase
 
         $this->assertDatabaseEmpty('users');
     }
+
+    /** @test */
+    function the_twitter_field_must_be_valid()
+    {
+        $this->withExceptionHandling();
+
+        $this->from('usuarios/nuevo')
+            ->post('usuarios', $this->getValidData([
+                'twitter' => 'twitter-no-valido',
+            ]))
+            ->assertSessionHasErrors('twitter');
+
+        $this->assertDatabaseEmpty('users');
+    }
+
+    /** @test */ 
+    function the_bio_field_must_be_valid()
+    {
+        $this->withExceptionHandling();
+
+        $this->from('usuarios/nuevo')
+            ->post('usuarios', $this->getValidData([
+                'bio' => '',
+            ]))
+            ->assertSessionHasErrors('bio');
+
+        $this->assertDatabaseEmpty('users');
+    }
 }
