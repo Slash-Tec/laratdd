@@ -88,6 +88,15 @@ class UserController extends Controller
         return redirect()->route('users.trashed');
     }
 
+    public function restore($id)
+    {
+        $user = User::onlyTrashed()
+            ->where('id', $id)->restore();
+            /*->firstOrFail();*/
+
+        $user->forceRestore();
+    }
+
     public function trash(User $user)
     {
         $user->delete();

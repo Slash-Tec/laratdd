@@ -34,7 +34,9 @@ Route::get('usuarios/{user}', 'UserController@show')
 
 Route::put('usuarios/{user}', 'UserController@update')->name('user.update');
 
-Route::delete('usuarios/{id}', 'UserController@destroy')->name('user.destroy');
+Route::delete('usuarios/{id}', 'UserController@destroy')->name('user.destroy'); /*[UserController::class, 'restore']*/
+
+Route::get('usuarios/restore/{id}', 'UserController@restore')->name('user.restore');
 
 Route::get('editar-perfil', 'ProfileController@edit');
 Route::put('editar-perfil', 'ProfileController@update');
